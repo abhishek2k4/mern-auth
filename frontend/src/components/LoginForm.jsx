@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import api from "../api/axios";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -13,7 +14,7 @@ function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData)
+    // console.log(formData)
     try {
       const response = await api.post("/auth/login", formData);
       console.log("Login success:", response.data);
