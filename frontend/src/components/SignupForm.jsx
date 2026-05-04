@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import api from "../api/axios";
 
 function SignupForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -20,10 +22,10 @@ function SignupForm() {
       const response = await api.post("/auth/signup", formData);
       console.log("Signup success:", response.data);
 
-      // Store token in localStorage
-      localStorage.setItem("token", response.data.token);
 
-      alert("Signup successful!");
+      navigate('/home');
+
+      // alert("Signup successful!");
     } catch (error) {
       console.error("Signup error:", error.response?.data);
       alert(error.response?.data?.message || "Signup failed");

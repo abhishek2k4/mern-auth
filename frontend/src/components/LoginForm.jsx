@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import api from "../api/axios";
 
 function LoginForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,10 +21,8 @@ function LoginForm() {
       const response = await api.post("/auth/login", formData);
       console.log("Login success:", response.data);
 
-      // Store token
-      localStorage.setItem("token", response.data.token);
-
-      alert("Login successful!");
+      navigate('/home'); 
+      // alert("Login successful!");
     } catch (error) {
       console.error("Login error:", error.response?.data);
       alert(error.response?.data?.message || "Login failed");
